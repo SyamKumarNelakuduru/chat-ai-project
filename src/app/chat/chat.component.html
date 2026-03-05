@@ -1,0 +1,27 @@
+<div class="chat">
+  <div class="chat-header">Pharmacy AI Chat</div>
+
+  <div class="chat-messages" #messagesContainer>
+    <div
+      class="msg"
+      *ngFor="let m of messages"
+      [class.me]="m.sender === 'me'"
+      [innerHTML]="m.text | formatText"
+    >
+    </div>
+    <div class="msg loading" *ngIf="isLoading">
+      Thinking... 🤔
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Ask about pharmacy data..."
+      [(ngModel)]="newMessage"
+      (keydown.enter)="send()"
+      [disabled]="isLoading"
+    />
+    <button (click)="send()" [disabled]="isLoading">Send</button>
+  </div>
+</div>
